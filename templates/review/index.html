@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div style="text-align: center;">
+        <h1>Place Reviewer</h1>
+    </div>
+    <div style="display: flex; align-items: center;justify-content: center; flex-direction: row; flex-wrap: wrap;">
+                {% for place in places %}
+                <div style="max-width: 460px; padding: 20px;">
+                <div class="card" style="max-width: 460px;">
+                    <img src="{{place.photo}}" class="card-img-top" alt="photo">
+                    <div class="card-body">
+                    <h5 class="card-title">{{place.name}}</h5>
+                    <p class="card-text">{{place.location}}</p>
+                    <p class="card-text">{{place.description}}</p>
+                    <a href="{% url 'reviews' place.id %}" class="btn btn-primary">View Reviews</a>
+                    </div>
+                </div>
+                </div>
+                {% endfor %}
+
+
+    </div>
+
+
+</body>
+</html>
