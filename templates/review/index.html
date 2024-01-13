@@ -6,14 +6,18 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
+
+<div class="main_wrapper" style="display: flex; align-items: center;justify-content: center; flex-direction: column; flex-wrap: wrap;">
+
     <div style="text-align: center;">
         <h1>Place Reviewer</h1>
     </div>
-    <div style="display: flex; align-items: center;justify-content: center; flex-direction: row; flex-wrap: wrap;">
+
+        <div style="display: flex; align-items: center;justify-content: center; flex-direction: row; flex-wrap: wrap; max-width: 1000px;">
                 {% for place in places %}
-                <div style="max-width: 460px; padding: 20px;">
+                <div style="max-width: 440px; padding: 20px;">
                 <div class="card" style="max-width: 460px;">
-                    <img src="{{place.photo}}" class="card-img-top" alt="photo">
+                    <img src="{{place.photo}}" class="card-img-top" alt="photo" style="max-height: 280px; max-width: 400px">
                     <div class="card-body">
                     <h5 class="card-title">{{place.name}}</h5>
                     <p class="card-text">{{place.location}}</p>
@@ -23,10 +27,12 @@
                 </div>
                 </div>
                 {% endfor %}
+        </div>
 
-
+    <div style="display: flex; align-items: center;justify-content: center; flex-direction: row; flex-wrap: wrap;">
+        <a href="{% url 'place_add' %}" class="btn btn-primary">Add Place</a>
     </div>
 
-
+</div>
 </body>
 </html>

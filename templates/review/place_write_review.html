@@ -1,12 +1,14 @@
-{% load util %}
 <!DOCTYPE html>
+{% load util %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Reviews</title>
+    <title>Write review</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 </head>
 <body>
+
 <div class="main_wrapper" style="display: flex; align-items: center;justify-content: center; flex-direction: column; flex-wrap: wrap;">
 
     <h1>Place Reviews</h1>
@@ -16,34 +18,28 @@
             <h5 class="card-title">{{place.name}}</h5>
             <p class="card-text">{{place.location}}</p>
             <p class="card-text">{{place.description}}</p>
-            <p class="card-text">
-                Rating: {{ rating }}
-                {% if rating|get_type == 'float' %}
-                    /5
-                {% endif %}
-            </p>
-            <div style="display: flex; justify-content: space-between;">
-                <a href="{% url 'write_review' place.id %}" class="btn btn-primary">Write Review</a>
-                <a href="{% url 'index' %}" class="btn btn-primary">All Places</a>
+            <a href="{% url 'reviews' place.id %}" class="btn btn-primary">Read Reviews</a>
+        </div>
+    </div>
+
+    <div style="margin-top: 20px;">
+    <form method="POST" action="{% url 'write_review' place.id %}">
+        {% csrf_token %}
+            <div class="form-group">
+            {{ form.username }}
             </div>
-        </div>
+            <div class="form-group">
+            {{ form.stars }}
+            </div>
+            <div class="form-group">
+            {{ form.comment }}
+            </div>
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
     </div>
 
-    <div>
-        <h2>Reviews:</h2>
-        {% for review in reviews %}
-
-        <div>
-
-            <h3>Author: {{review.username}}</h3>
-            <p>{{review.stars}}/5</p>
-            <p>{{ review.comment  }}</p>
-
-        </div>
-
-        {% endfor %}
-    </div>
 
 </div>
+
 </body>
 </html>
