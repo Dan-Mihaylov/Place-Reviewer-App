@@ -52,25 +52,31 @@ class PlaceAddForm(forms.ModelForm):
         widgets = {
             'name': forms.TextInput(
                 attrs={
-                    'style': 'background-color: red; margin: 5px;',
                     'placeholder': 'Place Name',
+                    'class': 'form-control',
                 }
             ),
             'location': forms.TextInput(
                 attrs={
                     'placeholder': 'Location',
-                    'style': 'margin: 5px;'
+                    'class': 'form-control',
                 }
             ),
             'description': forms.Textarea(
                 attrs={
                     'placeholder': 'Description',
-                    'style': 'margin 5px;'
+                    'class': 'form-control',
                 }
             ),
             'photo': forms.URLInput(
                 attrs={
                     'placeholder': 'Photo URL',
+                    'class': 'form-control',
                 }
             ),
         }
+
+
+class FilterForm(forms.Form):
+
+    search_query = forms.CharField(label='Filter', required=False)

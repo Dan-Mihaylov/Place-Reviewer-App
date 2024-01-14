@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 
 from .models import Place
-from .forms import PlaceAddForm, ReviewWriteForm
+from .forms import PlaceAddForm, ReviewWriteForm, FilterForm
 
 
 def index(request):
@@ -11,12 +11,14 @@ def index(request):
 
 
 def view_reviews(request, place_id):
+    print(request.GET)
     place = get_object_or_404(Place, id=place_id)
     reviews = place.reviews.all()
     context = {
         'place': place,
         'reviews': reviews,
         'rating': round(place.total_stars()['average'], 2) if place.reviews.all() else 'No Rating',
+        'form': FilterForm()
     }
 
     return render(request, template_name='review/place_reviews.html', context=context)
