@@ -1,19 +1,22 @@
 from django.shortcuts import render, get_object_or_404, redirect
 
+from .helpers import filter_reviews_by
 from .models import Place
 from .forms import PlaceAddForm, ReviewWriteForm, FilterForm
 
 
 def index(request):
+
     places = Place.objects.all()
 
     return render(request, template_name='review/index.html', context={'places': places})
 
 
 def view_reviews(request, place_id):
-    print(request.GET)
+
     place = get_object_or_404(Place, id=place_id)
-    reviews = place.reviews.all()
+    reviews = filter_reviews_by(request, place)
+
     context = {
         'place': place,
         'reviews': reviews,

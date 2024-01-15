@@ -13,23 +13,32 @@
         <h1>Place Reviewer</h1>
     </div>
 
-        <div style="display: flex; align-items: center;justify-content: center; flex-direction: row; flex-wrap: wrap; max-width: 1000px;">
-                {% for place in places %}
-                <div style="max-width: 440px; padding: 20px;">
+    <div style="display: flex; align-items: center;justify-content: center; flex-direction: row; flex-wrap: wrap; max-width: 1000px;">
+
+        {% for place in places %}
+
+            <div style="max-width: 440px; padding: 20px;">
+
                 <div class="card" style="max-width: 460px;">
                     <img src="{{place.photo}}" class="card-img-top" alt="photo" style="max-height: 280px; max-width: 400px">
-                    <div class="card-body">
-                    <h5 class="card-title">{{place.name}}</h5>
-                    <p class="card-text">{{place.location}}</p>
-                    <p class="card-text">{{place.description}}</p>
-                    <a href="{% url 'reviews' place.id %}" class="btn btn-primary">View Reviews</a>
-                    </div>
-                </div>
-                </div>
-                {% endfor %}
-        </div>
 
-    <div style="display: flex; align-items: center;justify-content: center; flex-direction: row; flex-wrap: wrap;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{place.name}}</h5>
+                        <p class="card-text">{{place.location}}</p>
+                        <p class="card-text">{{place.description}}</p>
+                        <a href="{% url 'reviews' place.id %}" class="btn btn-primary">View Reviews</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+    <div style="display: flex; align-items: center;justify-content: center; flex-direction: row; flex-wrap: wrap; margin-bottom: 20px;">
         <a href="{% url 'place_add' %}" class="btn btn-primary">Add Place</a>
     </div>
 

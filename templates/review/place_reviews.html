@@ -10,14 +10,6 @@
 
 <div class="main_wrapper" style="display: flex; align-items: center;justify-content: center; flex-direction: column; flex-wrap: wrap;">
 
-{#   I am going to make a form to have the functionality of a filter on the page.   #}
-    <form method="GET" action="{% url 'reviews' place.id %}">
-        {{ form.as_div }}
-        <button type="submit">Filter</button>
-
-    </form>
-
-
     <div class="flex-container" style="border: 1px solid rgba(0, 0, 0, 0.2); min-width: 400px; border-radius: 5px; margin-top: 10px; text-align: center;">
         <h1>Place Reviews</h1>
     </div>
@@ -47,28 +39,43 @@
     </div>  {# card #}
 
     <div class="flex-container" style="border: 1px solid rgba(0, 0, 0, 0.2); margin:10px 0 10px 0; width: 25rem; padding: 10px; border-radius: 5px;">
-        <div style="text-align: center;">
+            <div>
+                <form method="GET" action="{% url 'reviews' place.id %}">
+                    {{ form.as_p}}
+                    <button type="submit" class="btn btn-secondary">Filter</button>
+                </form>
+            </div>
+    </div>
+
+    <div class="flex-container" style="border: 1px solid rgba(0, 0, 0, 0.2); margin:10px 0 10px 0; width: 25rem; padding: 10px; border-radius: 5px;">
+
+        <div style="text-align: center; display: flex; justify-content: space-between;">
+
             <h2 style="margin-bottom: 30px;">Reviews:</h2>
+
         </div>
 
         {% for review in reviews %}
 
         <div style="background-color: cadetblue; margin-bottom: 0; padding: 10px; border-radius: 5px 5px 0 0; display: flex; justify-content: space-between;">
+
             <div style="width: 200px; height: 30px;">
-                <h3 style="font-size: 1.4rem;">Author:</h3>
+                <h3 style="font-size: 1.4rem;">{{ review.username }}</h3>
             </div>
+
             <div style="max-width: 200px; height: 30px;">
-                <p style="line-height: 30px;">{{review.username}}</p>
+                <p style="line-height: 30px;">{{review.get_formatted_time}}</p>
             </div>
+
         </div>
 
         <div style="border: 1px solid rgba(0, 0, 0, 0.2); margin-bottom: 10px; border-radius: 0 0 5px 5px; padding: 10px;">
             <p>{{review.stars}}/5</p>
             <p>{{ review.comment  }}</p>
-
         </div>
 
         {% endfor %}
+
     </div>
 
 </div> {# main wrapper #}

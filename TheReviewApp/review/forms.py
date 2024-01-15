@@ -79,4 +79,11 @@ class PlaceAddForm(forms.ModelForm):
 
 class FilterForm(forms.Form):
 
-    search_query = forms.CharField(label='Filter', required=False)
+    CHOICES = (
+        ('time_a', 'Time Asc'),
+        ('time_d', 'Time Desc'),
+        ('stars_a', 'Stars Asc'),
+        ('stars_d', 'Stars Desc'),
+    )
+
+    filter_by = forms.ChoiceField(choices=CHOICES, widget=forms.Select(attrs={'class': 'form-control'}))
