@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import index, view_reviews, place_add, write_review
+from TheReviewApp.review.views import index, view_reviews, place_add, write_review
 
 
 urlpatterns = (

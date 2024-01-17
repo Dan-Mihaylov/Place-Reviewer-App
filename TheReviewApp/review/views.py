@@ -1,13 +1,14 @@
 from django.shortcuts import render, get_object_or_404, redirect
 
-from .helpers import filter_reviews_by
-from .models import Place
-from .forms import PlaceAddForm, ReviewWriteForm, FilterForm
+from TheReviewApp.review.helpers import filter_reviews_by
+from TheReviewApp.review.models import Place
+from TheReviewApp.review.forms import PlaceAddForm, ReviewWriteForm, FilterForm
 
 
 def index(request):
 
     places = Place.objects.all()
+    print(request.META)
 
     return render(request, template_name='review/index.html', context={'places': places})
 
@@ -30,7 +31,7 @@ def view_reviews(request, place_id):
 def place_add(request):
 
     if request.method == 'POST':
-        form = PlaceAddForm(request.POST)
+        form = PlaceAddForm(request, data=request.POST)
 
         if form.is_valid():
             form.save()
@@ -59,5 +60,3 @@ def write_review(request, place_id: int):
     context['form'] = ReviewWriteForm()
 
     return render(request, template_name='review/place_write_review.html', context=context)
-
-

@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     # Third party apps
 
     # Local apps
-    'TheReviewApp.review'
+    'TheReviewApp.review',
+    'TheReviewApp.accounts',
 ]
 
 MIDDLEWARE = [
