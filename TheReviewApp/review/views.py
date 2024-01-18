@@ -8,7 +8,6 @@ from TheReviewApp.review.forms import PlaceAddForm, ReviewWriteForm, FilterForm
 def index(request):
 
     places = Place.objects.all()
-    print(request.META)
 
     return render(request, template_name='review/index.html', context={'places': places})
 

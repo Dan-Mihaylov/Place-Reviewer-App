@@ -1,13 +1,12 @@
 from django import forms
 from django.contrib.auth import forms as auth_forms, get_user_model
-
-from TheReviewApp.accounts.models import PlaceUser
+from django.contrib.auth.models import User
 
 
 class RegisterUserForm(auth_forms.BaseUserCreationForm):
 
     class Meta:
-        model = PlaceUser
+        model = User
         fields = ('username', 'email', 'password1', 'password2')
 
     def save(self, commit=True):
