@@ -38,7 +38,7 @@ class ReviewWriteForm(forms.ModelForm):
 
 class PlaceAddForm(forms.ModelForm):
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, user=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         # removing the labels in front of the forms.
@@ -46,9 +46,14 @@ class PlaceAddForm(forms.ModelForm):
         for field_name, field in self.fields.items():
             field.label = False
 
+        if user is not None:
+            self.fields['user'].initial = user
+            self.fields['user'].widget = forms.HiddenInput()
+            self.fields['user'].required = False
+
     class Meta:
         model = Place
-        fields = ['name', 'location', 'description', 'photo']
+        fields = ['name', 'location', 'description', 'photo', 'user']
         widgets = {
             'name': forms.TextInput(
                 attrs={

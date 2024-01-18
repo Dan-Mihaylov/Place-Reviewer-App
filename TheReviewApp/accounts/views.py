@@ -39,3 +39,8 @@ def login_page(request):
 
     return render(request, template_name='accounts/login.html')
 
+
+def logout_page(request):
+
+    logout(request)
+    return redirect(to='index')

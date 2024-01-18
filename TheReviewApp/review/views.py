@@ -1,4 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 from TheReviewApp.review.helpers import filter_reviews_by
 from TheReviewApp.review.models import Place
@@ -7,9 +9,14 @@ from TheReviewApp.review.forms import PlaceAddForm, ReviewWriteForm, FilterForm
 
 def index(request):
 
-    places = Place.objects.all()
+    context = {
+        'places': Place.objects.all(),
+        'user': request.user if request.user.id is not None else 'blank',
+    }
 
-    return render(request, template_name='review/index.html', context={'places': places})
+    print(request.user.username)
+
+    return render(request, template_name='review/index.html', context=context)
 
 
 def view_reviews(request, place_id):
@@ -27,17 +34,19 @@ def view_reviews(request, place_id):
     return render(request, template_name='review/place_reviews.html', context=context)
 
 
+@login_required(login_url='login')
 def place_add(request):
 
     if request.method == 'POST':
-        form = PlaceAddForm(request, data=request.POST)
-
+        form = PlaceAddForm(request.user, request.POST)
         if form.is_valid():
             form.save()
+            # place = form.save(commit=False)
+            # place.user = request.user
+            # place.save()
+
             return redirect('index')
-
-    form = PlaceAddForm()
-
+    form = PlaceAddForm(request.user)   # In the form I have created, __init__ takes the user
     return render(request, template_name='review/place_add.html', context={'form': form})
 
 

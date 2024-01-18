@@ -9,8 +9,36 @@
 
 <div class="main_wrapper" style="display: flex; align-items: center;justify-content: center; flex-direction: column; flex-wrap: wrap;">
 
-    <div style="text-align: center;">
-        <h1>Place Reviewer</h1>
+    <div style="text-align: center; width: 1000px; background-color: darksalmon; display: flex; justify-content: space-between; margin: 20px 0 20px 0; border-radius: 5px;">
+
+        <div style="display: flex; width: 100%; flex: 40%; justify-content: center; align-items: center;">
+
+            <h1>Place Reviewer</h1>
+        </div>
+
+        <div style="display: flex; flex: 40%; justify-content: flex-end; align-items: center;">
+            {% if user != "blank" %}
+                <div style="margin-right: 10px;">
+                <span>Welcome:</span>
+                <span> <strong> {{ user }} </strong></span>
+                </div>
+                <a href="{% url 'logout' %}" class="btn btn-primary">
+                    Logout
+                </a>
+
+            {% else %}
+
+                <a href="{% url 'login' %}" class="btn btn-primary" style="margin: 0 5px 0 5px;">
+                    Login
+                </a>
+                <a href="{% url 'register' %}" class="btn btn-primary" style="margin: 0 5px 0 5px;">
+                    Register
+                </a>
+
+            {% endif %}
+        </div>
+
+
     </div>
 
     <div style="display: flex; align-items: center;justify-content: center; flex-direction: row; flex-wrap: wrap; max-width: 1000px;">
