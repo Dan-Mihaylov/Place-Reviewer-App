@@ -2,8 +2,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
-from TheReviewApp.review.helpers import filter_reviews_by
-from TheReviewApp.review.models import Place
+from TheReviewApp.review.helpers import (
+    filter_reviews_by, like_review, liked_already, dislike_review, get_reviews_with_user_likes
+)
+from TheReviewApp.review.models import Place, Review
 from TheReviewApp.review.forms import PlaceAddForm, ReviewWriteForm, FilterForm
 
 
@@ -19,16 +21,21 @@ def index(request):
     return render(request, template_name='review/index.html', context=context)
 
 
-def view_reviews(request, place_id):
+def view_reviews(request, place_id, review_id=None):
 
     place = get_object_or_404(Place, id=place_id)
     reviews = filter_reviews_by(request, place)
+    if review_id is not None:
+        review = reviews.get(id=review_id)
+        user = request.user
+        dislike_review(user, review) if liked_already(user, review) else like_review(user, review)
 
     context = {
         'place': place,
         'reviews': reviews,
         'rating': round(place.total_stars()['average'], 2) if place.reviews.all() else 'No Rating',
-        'form': FilterForm()
+        'form': FilterForm(),
+        'liked_reviews': get_reviews_with_user_likes(request, reviews)
     }
 
     return render(request, template_name='review/place_reviews.html', context=context)

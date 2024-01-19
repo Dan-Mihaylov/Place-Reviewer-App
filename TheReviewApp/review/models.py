@@ -13,7 +13,7 @@ class Place(models.Model):
     added_on = models.DateTimeField(auto_now_add=True, editable=False)
     location = models.CharField(max_length=50,)
     description = models.TextField()
-    photo = models.URLField(default='https://www.invoicera.com/wp-content/uploads/2023/11/default-image.jpg')
+    photo = models.URLField()
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='places')
 
     def total_stars(self):
@@ -37,7 +37,7 @@ class Review(models.Model):
     comment = models.TextField()
     place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name='reviews')
     added_on = models.DateTimeField(auto_now_add=True, blank=True, null=True)
-    helpful_count = models.IntegerField(default=0)
+    user_likes = models.ManyToManyField(User, related_name='reviews_likes', null=True, blank=True)
 
     def get_formatted_time(self):
         result = [
@@ -45,3 +45,7 @@ class Review(models.Model):
             datetime.time(self.added_on).strftime('%H:%M'),
         ]
         return f' at '.join(result)
+
+    def add_user(self, user: User):
+        self.user_likes.add(user)
+        self.save()

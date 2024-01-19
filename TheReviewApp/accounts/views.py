@@ -4,19 +4,17 @@ from django.contrib import messages
 
 from TheReviewApp.accounts.forms import RegisterUserForm, CustomAuthenticationForm
 
-from django.contrib.auth.forms import UserCreationForm
-
 
 def register_page(request):
 
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = RegisterUserForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, f'Account registered for user: {form.cleaned_data["username"]}')
             return redirect('login')
 
-    form = UserCreationForm()
+    form = RegisterUserForm()
 
     return render(request, template_name='accounts/register.html', context={'form': form})
 

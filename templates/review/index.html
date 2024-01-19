@@ -2,36 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        html, body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                background-image: url("https://images.pexels.com/photos/691668/pexels-photo-691668.jpeg");
+                background-size: cover;
+                background-position: center;
+                background-attachment: fixed;
+            }
+    </style>
 </head>
 <body>
 
 <div class="main_wrapper" style="display: flex; align-items: center;justify-content: center; flex-direction: column; flex-wrap: wrap;">
 
-    <div style="text-align: center; width: 1000px; background-color: darksalmon; display: flex; justify-content: space-between; margin: 20px 0 20px 0; border-radius: 5px;">
+        <div style="text-align: center; background-color: #004d4d; display: flex; justify-content: space-between; margin: 20px 0 20px 0; border-radius: 5px; max-width: 1000px; width: 100%; box-sizing: border-box; min-height: 50px;">
 
-        <div style="display: flex; width: 100%; flex: 40%; justify-content: center; align-items: center;">
+            <div style="display: flex; width: 100%; flex: 40%; justify-content: left; align-items: center;">
+                <h1 style="margin-left: 10px; color: lavender; font-size: x-large;">Place Reviewer</h1>
+            </div>
 
-            <h1>Place Reviewer</h1>
-        </div>
 
         <div style="display: flex; flex: 40%; justify-content: flex-end; align-items: center;">
             {% if user != "blank" %}
-                <div style="margin-right: 10px;">
-                <span>Welcome:</span>
-                <span> <strong> {{ user }} </strong></span>
+                <div style="margin-right: 10px; font-size: x-small; color: lavender;">
+                    <span>Welcome:</span>
+                    <p style="margin: 0 5px 0 5px;"> {{ user }}</p>
                 </div>
-                <a href="{% url 'logout' %}" class="btn btn-primary">
+                <a href="{% url 'logout' %}" class="btn btn-light" style="margin: 0 5px 0 5px;">
                     Logout
                 </a>
 
             {% else %}
 
-                <a href="{% url 'login' %}" class="btn btn-primary" style="margin: 0 5px 0 5px;">
+                <a href="{% url 'login' %}" class="btn btn-light" style="margin: 0 5px 0 5px;">
                     Login
                 </a>
-                <a href="{% url 'register' %}" class="btn btn-primary" style="margin: 0 5px 0 5px;">
+                <a href="{% url 'register' %}" class="btn btn-light" style="margin: 0 5px 0 5px;">
                     Register
                 </a>
 
@@ -39,22 +51,27 @@
         </div>
 
 
-    </div>
+        </div>
 
-    <div style="display: flex; align-items: center;justify-content: center; flex-direction: row; flex-wrap: wrap; max-width: 1000px;">
+    <div style="display: flex; align-items: center;justify-content: center; flex-direction: row; flex-wrap: wrap; max-width: 1000px; background-color: rgba(0, 0, 0, 0.2); border-radius: 5px; width: 100%;">
 
         {% for place in places %}
 
             <div style="max-width: 440px; padding: 20px;">
 
-                <div class="card" style="max-width: 460px;">
-                    <img src="{{place.photo}}" class="card-img-top" alt="photo" style="max-height: 280px; max-width: 400px">
+                <div class="card" style="max-width: 460px; box-shadow: 1px 1px 6px 0 rgba(0, 0, 0, 0.2)">
+                    <a href="{% url 'reviews' place.id %}">
+                        <img src="{{place.photo}}" class="card-img-top" alt="photo" style="max-height: 280px; max-width: 400px">
+                    </a>
 
                     <div class="card-body">
-                        <h5 class="card-title">{{place.name}}</h5>
+                        <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                            <h5 class="card-title">{{place.name}}</h5>
+                            <p>Added by: {{ place.user.username }}</p>
+                        </div>
                         <p class="card-text">{{place.location}}</p>
                         <p class="card-text">{{place.description}}</p>
-                        <a href="{% url 'reviews' place.id %}" class="btn btn-primary">View Reviews</a>
+                        <a href="{% url 'reviews' place.id %}" class="btn btn-dark">View Reviews</a>
 
                     </div>
 
@@ -66,8 +83,8 @@
 
     </div>
 
-    <div style="display: flex; align-items: center;justify-content: center; flex-direction: row; flex-wrap: wrap; margin-bottom: 20px;">
-        <a href="{% url 'place_add' %}" class="btn btn-primary">Add Place</a>
+    <div style="display: flex; align-items: center;justify-content: center; flex-direction: row; flex-wrap: wrap; margin: 20px 0 20px 0;">
+        <a href="{% url 'place_add' %}" class="btn btn-dark">Add Place</a>
     </div>
 
 </div>
