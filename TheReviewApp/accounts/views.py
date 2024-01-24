@@ -13,6 +13,8 @@ def register_page(request):
             form.save()
             messages.success(request, f'Account registered for user: {form.cleaned_data["username"]}')
             return redirect('login')
+        else:
+            messages.error(request, f'{form.errors}')
 
     form = RegisterUserForm()
 

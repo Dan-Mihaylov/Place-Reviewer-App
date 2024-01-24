@@ -71,7 +71,13 @@
                         </div>
                         <p class="card-text">{{place.location}}</p>
                         <p class="card-text">{{place.description}}</p>
-                        <a href="{% url 'reviews' place.id %}" class="btn btn-dark">View Reviews</a>
+                        <div class="card-buttons-div" style="display: flex; flex-direction: row; justify-content: space-between;">
+                            <a href="{% url 'reviews' place.id %}" class="btn btn-dark">View Reviews</a>
+                            {% if place.user == user %}
+                                <a href="{% url 'edit_place' place.id %}" class="btn btn-dark">Edit Place</a>
+                            {% endif %}
+
+                        </div>
 
                     </div>
 

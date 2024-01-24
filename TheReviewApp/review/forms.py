@@ -2,6 +2,25 @@ from django import forms
 from TheReviewApp.review.models import Place, Review
 
 
+class EditPlaceForm(forms.ModelForm):
+    class Meta:
+        model = Place
+        fields = ['name', 'location', 'description', 'user', 'photo']
+
+    def __init__(self, *args, **kwargs):    # user=None
+        super().__init__(*args, **kwargs)
+
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
+
+        self.fields['user'].widget = forms.HiddenInput()
+
+        # if user is not None:
+        #     self.fields['user'].initial = user
+        #     self.fields['user'].widget = forms.HiddenInput()
+        #     self.fields['user'].required = False
+
+
 class ReviewWriteForm(forms.ModelForm):
 
     stars = forms.ChoiceField(

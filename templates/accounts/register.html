@@ -70,6 +70,9 @@
 
         <form method="POST" action="{% url 'register' %}">
             {% csrf_token %}
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
 
             <div class="form-div">
                 {{ form.username }}
