@@ -1,0 +1,143 @@
+.content-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 0;
+    max-width: 1200px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    margin: 0 0 20px 0;
+    color: rgb(40, 40, 40);
+}
+
+.flex-container {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    width: 100%;
+    border-radius: 5px;
+    margin-top: 10px;
+    text-align: center;
+    box-shadow: 1px 1px 6px 0 rgba(0, 0, 0, 0.2);
+    background-color: whitesmoke;
+}
+
+.card {
+    max-width: 600px;
+    width: 100%;
+    max-height: 1000px;
+    height: 100%;
+    margin-top: 10px;
+    box-shadow: 1px 1px 6px 0 rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+}
+
+.card-img-top {
+    max-height: 1000px;
+    max-width: 600px;
+    width: 100%;
+    height: 100%;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.filter-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    width: 100%;
+    background-color: whitesmoke;
+    margin-top: 10px;
+    border-radius: 5px;
+    padding: 0 10px 0 10px;
+}
+
+.form-container {
+    margin: 20px 0 20px 0;
+    max-width: 600px;
+    width: 100%;
+}
+
+.reviews-container {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    margin: 10px 0 10px 0;
+    max-width: 600px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 6px 0 rgba(0, 0, 0, 0.2);
+    background-color: whitesmoke;
+}
+
+.reviews-header {
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.review-group {
+    background-color: cadetblue;
+    margin-bottom: 0;
+    padding: 10px;
+    border-radius: 5px 5px 0 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.review-username {
+    width: 200px;
+    height: 30px;
+    line-height: 30px;
+}
+
+.review-date {
+    width: 200px;
+    height: 30px;
+    line-height: 30px;
+    text-align: right;
+}
+
+.review-content {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    margin-bottom: 10px;
+    border-radius: 0 0 5px 5px;
+    padding: 10px;
+}
+
+.review-buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.helpful-left {
+    max-width: 300px;
+    width: 100%;
+}
+
+.helpful-right {
+    max-width: 300px;
+    width: 100%;
+    text-align: right;
+}
+
+.likes-link {
+    text-decoration: none;
+    color: inherit;
+}

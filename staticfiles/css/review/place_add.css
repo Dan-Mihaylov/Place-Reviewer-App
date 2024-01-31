@@ -1,0 +1,40 @@
+.content-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    width: 100%;
+    margin: 10px 0 20px 0;
+    padding: 20px 0 20px 0;
+}
+
+.header {
+    background-color: whitesmoke;
+    color: rgb(40, 40, 40);
+    display: flex;
+    justify-content: center;
+    max-width: 600px;
+    border-radius: 5px;
+    text-align: center;
+    width: 100%;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.form-row {
+    max-width: 600px;
+    width: 100%;
+    margin: 10px 0 10px 0;
+}
+
+.flex-container {
+    max-width: 600px;
+    width: 100%;
+    padding: 0;
+}

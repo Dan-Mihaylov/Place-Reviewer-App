@@ -1,0 +1,55 @@
+.content-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+.header-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 600px;
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    margin: 20px 0 20px 0;
+    box-shadow: 1px 0 6px 0 rgba(0, 0, 0, 0.2);
+    background-color: whitesmoke;
+}
+
+.card {
+    max-width: 600px;
+    width: 100%;
+}
+
+.card-img-top {
+    max-height: 800px;
+    width: 100%;
+    max-width: 600px;
+    height: 100%;
+}
+
+.form-container {
+    margin: 20px 0 20px 0;
+    max-width: 600px;
+    width: 100%;
+}
+
+.form-group {
+    min-width: 100%;
+    margin-top: 10px;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+/* Add more styles based on your specific needs */

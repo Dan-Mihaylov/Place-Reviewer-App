@@ -1,35 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Add place</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-</head>
-<body>
-    <div id="main_wrapper"  class="flex-container text-center" style="display: flex; flex-direction: column; justify-content: center;align-items: center;">
+{% extends "base/base.html" %}
+{% load static %}
 
-        <div class="flex-container" style="border: 1px solid rgba(0, 0, 0, 0.2); min-width: 24rem; border-radius: 5px; margin-top: 10px;">
+{% block title %} Add Place {% endblock %}
+{% block styles %} {% static "css/review/place_add.css" %} {% endblock %}
+
+
+
+{% block content %}
+
+    <div class="content-wrapper">
+
+        <div class="header">
             <h1>Add a new place</h1>
         </div>
 
-        <div class="flex-container" style="max-width: 40rem;" id="add-form-container">
+        <div class="flex-container" id="add-form-container">
 
             <form method="POST" action="{% url 'place_add' %}">
                 {% csrf_token %}
 
-                <div style="min-width: 100%; margin-top: 10px;">
+                <div class="form-row">
                     {{ form.name }}
                 </div>
 
-                <div style="min-width: 100%; margin-top: 10px;">
+                <div class="form-row">
                     {{ form.location }}
                 </div>
 
-                <div style="min-width: 100%; margin-top: 10px;">
+                <div class="form-multiline">
                     {{ form.description }}
                 </div>
 
-                <div style="min-width: 100%; margin-top: 10px;">
+                <div class="form-row">
                     {{ form.photo }}
                 </div>
 
@@ -37,8 +39,8 @@
                     {{ form.user }}
                 </div>
 
-                <div>
-                    <button type="submit" class="btn btn-primary" style="margin-top: 10px;">
+                <div class="form-btn">
+                    <button type="submit" class="btn btn-light">
                         Create Place
                     </button>
                 </div>
@@ -48,5 +50,6 @@
         </div>
 
     </div>
-</body>
-</html>
+
+{% endblock %}
+
