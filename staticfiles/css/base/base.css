@@ -19,16 +19,27 @@ html, body {
 
 .navbar {
     text-align: center;
-    background-color: rgba(57, 64, 55);
+    background-color: rgba(59, 71, 64);
     display: flex;
     justify-content: space-between;
-    margin: 0 0 20px 0;
-    border-radius: 0 0 5px 5px;
+    margin: 20px 0 20px 0;
+    border-radius: 5px;
     max-width: 1200px;
     width: 100%;
+
     box-sizing: border-box;
     min-height: 50px;
     height: 10vh;
+}
+
+.brand a {
+    text-decoration: none;
+    color: inherit;
+    font-size: 2em;
+}
+
+.brand a:hover {
+    color: darkgray;
 }
 
 

@@ -1,0 +1,38 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %} Edit Account {% endblock %}
+
+{% block styles %} {% static 'css/accounts/edit.css' %} {% endblock %}
+
+
+{% block content %}
+
+    <div class="content-wrapper">
+
+        <h1>This is the accounts Edit Page</h1>
+
+        <div class="form-div">
+
+            <form action="{% url 'account-info' user_id=request.user.id %}" method="POST">
+                {% csrf_token %}
+
+                {% for field in form %}
+
+                    {% if field.name != 'password' %}
+                        <div class="field-form">
+                            {{ field }}
+                        </div>
+                    {% endif %}
+
+                {% endfor %}
+
+                <button class="btn btn-dark" type="submit">Confirm</button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+{% endblock %}

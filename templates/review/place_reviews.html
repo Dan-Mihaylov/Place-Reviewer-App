@@ -83,7 +83,7 @@
                         <div class="review-buttons">
 
                             <div class="helpful-left">
-                                {% if review.id in liked_reviews %}
+                                {% if review|user_liked:request.user %}
 
                                     <a class="likes-link" href="{% url 'reviews_with_likes' place.id review.id %}">Dislike
                                         <svg style="width: 20px; height: 20px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-down" viewBox="0 0 16 16">
@@ -103,7 +103,7 @@
                             </div>
 
                             <div class="helpful-right">
-                                <p>Helpful Count: {{ review.user_likes.count }}</p>
+                                <p>Helpful Count: {{ review.likes.count }}</p>
                             </div>
 
                         </div>

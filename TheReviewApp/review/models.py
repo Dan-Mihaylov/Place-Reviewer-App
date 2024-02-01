@@ -37,7 +37,6 @@ class Review(models.Model):
     comment = models.TextField()
     place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name='reviews')
     added_on = models.DateTimeField(auto_now_add=True, blank=True, null=True)
-    user_likes = models.ManyToManyField(User, related_name='reviews_likes', null=True, blank=True)
 
     def get_formatted_time(self):
         result = [
@@ -46,6 +45,20 @@ class Review(models.Model):
         ]
         return f' at '.join(result)
 
-    def add_user(self, user: User):
-        self.user_likes.add(user)
-        self.save()
+    def __str__(self):
+        return f'Reviewer: {self.username}, stars: {self.stars}'
+
+
+class Like(models.Model):
+    user = models.ForeignKey(User, related_name='likes', on_delete=models.CASCADE)
+    review = models.ForeignKey(Review, related_name='likes', on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ['user', 'review']
+
+    def __str__(self):
+        return f'{self.user.username} Liked comment from Username: {self.review.username}'
+
+
+
+

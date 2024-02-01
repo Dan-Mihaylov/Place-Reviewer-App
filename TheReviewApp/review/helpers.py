@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
+from django.db.models import Q
 
-from TheReviewApp.review.models import Review
+from TheReviewApp.review.models import Review, Like
 
 
 def filter_reviews_by(request, place):
@@ -15,22 +16,20 @@ def filter_reviews_by(request, place):
     return reviews
 
 
-def get_reviews_with_user_likes(request, reviews):
-    user_id = request.user.id
-    result = []
-    for review in reviews:
-        if review.user_likes.filter(id=user_id).exists():
-            result.append(review.id)
-    return result
+def liked_already(user: User, review: Review) -> bool:
+    query = Q(user=user) & Q(review=review)
+    return Like.objects.filter(query).exists()
 
 
-def liked_already(user: User, review: Review):
-    return review.user_likes.filter(id=user.id).exists()
+def like_review(user: User, review: Review) -> None:
+    like = Like.objects.create(user=user, review=review)
+    like.save()
+    return
 
 
-def like_review(user: User, review: Review):
-    review.add_user(user)
+def dislike_review(user: User, review: Review) -> None:
+    query = Q(user=user) & Q(review=review)
+    like_object = Like.objects.get(query)
+    like_object.delete()
+    return
 
-
-def dislike_review(user: User, review: Review):
-    review.user_likes.remove(user)

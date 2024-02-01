@@ -1,8 +1,10 @@
 from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
+
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
 
-from TheReviewApp.accounts.forms import RegisterUserForm, CustomAuthenticationForm
+from TheReviewApp.accounts.forms import RegisterUserForm, CustomAuthenticationForm, EditAccountForm
 
 
 def register_page(request):
@@ -44,3 +46,26 @@ def logout_page(request):
 
     logout(request)
     return redirect(to='index')
+
+
+def account_info(request, user_id):
+
+    return HttpResponse('<h1> Account Info </h1>')
+
+
+@login_required(login_url='login')
+def edit_account(request):
+
+    form = EditAccountForm(None if request.method == 'GET' else request.POST, instance=request.user)
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'accounts/edit.html', context=context)
+
+
+@login_required(login_url='login')
+def delete_account(request):
+
+    return HttpResponse('<h1> Delete Account</h1>')

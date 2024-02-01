@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 from TheReviewApp.review.helpers import (
-    filter_reviews_by, like_review, liked_already, dislike_review, get_reviews_with_user_likes
+    filter_reviews_by, like_review, liked_already, dislike_review
 )
 from TheReviewApp.review.models import Place, Review
 from TheReviewApp.review.forms import PlaceAddForm, ReviewWriteForm, FilterForm, EditPlaceForm
@@ -21,6 +21,17 @@ def index(request):
     return render(request, template_name='review/index.html', context=context)
 
 
+def delete_place(request, place_id):
+
+    place = get_object_or_404(Place, id=place_id)
+
+    if request.user != place.user:
+        return render(request, 'cheeky_monkey.html')
+
+    place.delete()
+    return redirect('index')
+
+
 def view_reviews(request, place_id, review_id=None):
 
     place = get_object_or_404(Place, id=place_id)
@@ -35,7 +46,6 @@ def view_reviews(request, place_id, review_id=None):
         'reviews': reviews,
         'rating': round(place.total_stars()['average'], 2) if place.reviews.all() else 'No Rating',
         'form': FilterForm(),
-        'liked_reviews': get_reviews_with_user_likes(request, reviews)
     }
 
     return render(request, template_name='review/place_reviews.html', context=context)
@@ -92,6 +102,11 @@ def edit_place(request, place_id):
         print(f"Post: {request.POST}")
 
         if form.is_valid():
+
+            # Here you edit the instance of place that we have with the valid form-cleaned-data, then we save
+            # the instance of place, without creating new one. If we use `` form.save() `` we will create a new
+            # instance of place, with duplicate information.
+
             place.name = form.cleaned_data['name']
             place.location = form.cleaned_data['location']
             place.description = form.cleaned_data['description']
