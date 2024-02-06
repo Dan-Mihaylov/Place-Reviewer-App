@@ -1,0 +1,16 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}Acount Info{% endblock %}
+
+
+{% block content %}
+
+    <div class="content-wrapper">
+    {% if request.user.info.photo %}
+        <img style="width: 240px; height: 320px;" src="{{ request.user.info.photo.url }}" alt="s">
+    {% endif %}
+
+    </div>
+
+{% endblock %}

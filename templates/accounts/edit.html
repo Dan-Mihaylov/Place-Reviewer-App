@@ -14,10 +14,10 @@
 
         <div class="form-div">
 
-            <form action="{% url 'account-info' user_id=request.user.id %}" method="POST">
+            <form action="{% url 'edit-account' %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
 
-                {% for field in form %}
+                {% for field in account_form %}
 
                     {% if field.name != 'password' %}
                         <div class="field-form">
@@ -26,6 +26,14 @@
                     {% endif %}
 
                 {% endfor %}
+
+            {% for field in account_info_form %}
+
+                <div class="field-form">
+                    {{ field }}
+                </div>
+
+            {% endfor %}
 
                 <button class="btn btn-dark" type="submit">Confirm</button>
 

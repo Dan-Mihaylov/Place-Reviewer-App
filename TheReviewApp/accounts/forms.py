@@ -3,6 +3,8 @@ from django.contrib.auth import forms as auth_forms, get_user_model
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib.auth.models import User
 
+from TheReviewApp.accounts.models import UserInfo
+
 
 class RegisterUserForm(auth_forms.BaseUserCreationForm):
 
@@ -76,4 +78,34 @@ class EditAccountForm(UserChangeForm):
                 'placeholder': 'Email Address'
             })
         }
+
+
+class EditAccountInfoForm(forms.ModelForm):
+
+    class Meta:
+        model = UserInfo
+        fields = ['address_line', 'city', 'country', 'postcode', 'photo']
+        widgets = {
+            'address_line': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Address Line',
+            }),
+            'city': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'City',
+            }),
+            'postcode': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Postcode',
+            }),
+            'photo': forms.FileInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Select File',
+            }),
+            'country': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Country',
+            }),
+        }
+
 

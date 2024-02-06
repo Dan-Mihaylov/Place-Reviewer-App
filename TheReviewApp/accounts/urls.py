@@ -8,7 +8,7 @@ urlpatterns = (
     path('logout/', views.logout_page, name='logout'),
     path('account/', include(
         [
-            path('<int:user_id>', views.account_info, name='account-info'),
+            path('', views.account_info, name='account-info'),
             path('edit/', views.edit_account, name='edit-account'),
             path('delete/', views.delete_account, name='delete-account'),
         ]

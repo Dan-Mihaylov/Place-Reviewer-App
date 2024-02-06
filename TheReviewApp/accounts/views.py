@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
 
-from TheReviewApp.accounts.forms import RegisterUserForm, CustomAuthenticationForm, EditAccountForm
+from TheReviewApp.accounts.forms import RegisterUserForm, CustomAuthenticationForm, EditAccountForm, EditAccountInfoForm
 
 
 def register_page(request):
@@ -48,18 +48,30 @@ def logout_page(request):
     return redirect(to='index')
 
 
-def account_info(request, user_id):
+def account_info(request):
 
-    return HttpResponse('<h1> Account Info </h1>')
+    return render(request, 'accounts/account_info.html')
 
 
 @login_required(login_url='login')
 def edit_account(request):
 
-    form = EditAccountForm(None if request.method == 'GET' else request.POST, instance=request.user)
+    if request.method == 'POST':
+
+        edit_account_form = EditAccountForm(request.POST, instance=request.user)
+        edit_account_info_form = EditAccountInfoForm(request.POST, request.FILES, instance=request.user.info)
+
+        if edit_account_form.is_valid() and edit_account_info_form.is_valid():
+            edit_account_form.save()
+            edit_account_info_form.save()
+            return redirect('account-info')
+    else:
+        edit_account_form = EditAccountForm(instance=request.user)
+        edit_account_info_form = EditAccountInfoForm(instance=request.user.info)
 
     context = {
-        'form': form,
+        'account_form': edit_account_form,
+        'account_info_form': edit_account_info_form,
     }
 
     return render(request, 'accounts/edit.html', context=context)

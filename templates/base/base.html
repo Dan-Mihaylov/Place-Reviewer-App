@@ -21,15 +21,15 @@
         </div>
 
         <div class="user-section">
-            {% if user != "blank" %}
+            {% if user.is_authenticated %}
                 <div class="user-info">
                     <span>Welcome:</span>
                     <p>{{ user }}</p>
                 </div>
-                <a href="{% url 'logout' %}" class="btn btn-light">Logout</a>
+                <a href="{% url 'logout' %}" class="btn btn-dark">Logout</a>
             {% else %}
-                <a href="{% url 'login' %}" class="btn btn-light">Login</a>
-                <a href="{% url 'register' %}" class="btn btn-light">Register</a>
+                <a href="{% url 'login' %}" class="btn btn-dark">Login</a>
+                <a href="{% url 'register' %}" class="btn btn-dark">Register</a>
             {% endif %}
 
         </div>
