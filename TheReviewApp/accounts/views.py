@@ -1,10 +1,14 @@
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
 
+from django.views import generic as views
+
 from TheReviewApp.accounts.forms import RegisterUserForm, CustomAuthenticationForm, EditAccountForm, EditAccountInfoForm
+from TheReviewApp.review.models import Place
 
 
 def register_page(request):
@@ -48,9 +52,25 @@ def logout_page(request):
     return redirect(to='index')
 
 
-def account_info(request):
+class AccountInfoView(views.ListView, LoginRequiredMixin):
+    ITEMS_PER_PAGE = 4
 
-    return render(request, 'accounts/account_info.html')
+    model = Place
+    template_name = 'accounts/account_info.html'
+    paginate_by = ITEMS_PER_PAGE
+
+    def get_queryset(self):
+        queryset = self.request.user.places.all()
+        return queryset
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+
+# def account_info(request):
+#
+#     return render(request, 'accounts/account_info.html')
 
 
 @login_required(login_url='login')

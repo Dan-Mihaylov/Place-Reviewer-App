@@ -1,15 +1,80 @@
 {% extends 'base/base.html' %}
 {% load static %}
+{% load custom_filters %}
 
 {% block title %}Acount Info{% endblock %}
+{% block styles %}{% static 'css/accounts/account_info.css' %}{% endblock %}
 
 
 {% block content %}
 
-    <div class="content-wrapper">
-    {% if request.user.info.photo %}
-        <img style="width: 240px; height: 320px;" src="{{ request.user.info.photo.url }}" alt="s">
-    {% endif %}
+    <div class="content-wrapper" style="background-color: darkseagreen">
+
+        <div class="content">
+
+            <div class="left-side">
+
+                <div class="card" style="width: 25rem;">
+                    <img class="card-img-top" src="{{ request.user.info.photo.url }}" alt="Card image cap">
+
+                    <div class="card-body">
+
+                        <h5 class="card-title">@<strong>{{ request.user.username }}</strong></h5>
+                        <p class="card-text">
+                            {% if request.user.first_name %}
+                                {{ request.user.first_name }} {{ request.user.last_name }} this is some information about your
+                                user profile. Click edit, to change the information.
+                                {% else %}
+                                This is some information about your user profile. Click edit, to change the information.
+                            {% endif %}
+                        </p>
+
+                    </div>
+
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Address Line: </strong>{{ request.user.info.address_line }}</li>
+                        <li class="list-group-item"><strong>Postcode: </strong> {{ request.user.info.postcode }}</li>
+                        <li class="list-group-item"><strong>City: </strong>: {{ request.user.info.city }}</li>
+                        <li class="list-group-item"><strong>Country: </strong> {{ request.user.info.country }}</li>
+                    </ul>
+
+                    <div class="card-body">
+                        <a href="#" class="card-link">Edit Profile</a>
+                        <a href="#" class="card-link">Delete Profile</a>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="right-side">
+                <h1>@{{ request.user.username }}'s Places:</h1>
+
+                <div class="places-div">
+
+                        {% for item in object_list %}
+                            <div class="card" style="width: 18rem;">
+                              <img class="card-img-top" src="{{ item.photo }}" alt="Card image cap">
+
+                              <div class="card-body">
+
+                                <h5 class="card-title">{{ item.name }}</h5>
+                                <p class="card-text">{{ item.description|short_description }}</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+
+                              </div>
+
+                            </div>
+                        {% endfor %}
+
+                </div>
+
+                <div class="paginator-div">
+                    <h2>paginator pages</h2>
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 
