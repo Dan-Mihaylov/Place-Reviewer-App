@@ -76,7 +76,7 @@ class EditAccountForm(UserChangeForm):
             'email': forms.EmailInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Email Address'
-            })
+            }),
         }
 
 

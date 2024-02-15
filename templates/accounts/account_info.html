@@ -8,13 +8,13 @@
 
 {% block content %}
 
-    <div class="content-wrapper" style="background-color: darkseagreen">
+    <div class="content-wrapper">
 
         <div class="content">
 
             <div class="left-side">
 
-                <div class="card" style="width: 25rem;">
+                <div class="card">
                     <img class="card-img-top" src="{{ request.user.info.photo.url }}" alt="Card image cap">
 
                     <div class="card-body">
@@ -39,7 +39,7 @@
                     </ul>
 
                     <div class="card-body">
-                        <a href="#" class="card-link">Edit Profile</a>
+                        <a href="{% url 'edit-account' %}" class="card-link">Edit Profile</a>
                         <a href="#" class="card-link">Delete Profile</a>
                     </div>
 
@@ -47,13 +47,17 @@
 
             </div>
             <div class="right-side">
-                <h1>@{{ request.user.username }}'s Places:</h1>
+                {% if request.user.places %}
+                    <h1>@{{ request.user.username }}'s Places:</h1>
+                {% else %}
+                    <h1>@{{ request.user.username }}, you have not added any places yet.</h1>
+                {% endif %}
 
                 <div class="places-div">
 
                         {% for item in object_list %}
                             <div class="card" style="width: 18rem;">
-                              <img class="card-img-top" src="{{ item.photo }}" alt="Card image cap">
+                              <img class="card-img-top" src="{{ item.photo }}" alt="Card image cap" style="max-height: 250px;">
 
                               <div class="card-body">
 
@@ -69,7 +73,22 @@
                 </div>
 
                 <div class="paginator-div">
-                    <h2>paginator pages</h2>
+                    <span class="step-links">
+                        {% if page_obj.has_previous %}
+                            <a href="?page=1">&laquo; first</a>
+                            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                        {% endif %}
+
+                        <span class="current">
+                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                        </span>
+
+                        {% if page_obj.has_next %}
+                            <a href="?page={{ page_obj.next_page_number }}">next</a>
+                            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                        {% endif %}
+                    </span>
+
                 </div>
 
             </div>

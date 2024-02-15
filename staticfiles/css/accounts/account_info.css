@@ -1,4 +1,5 @@
 .content-wrapper {
+    color: inherit;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -11,6 +12,7 @@
 }
 
 .content {
+    color: inherit;
     margin: 20px 0 20px 0;
     display: flex;
     flex-wrap: wrap;
@@ -22,17 +24,29 @@
 }
 
 .left-side {
+    color: inherit;
     flex-basis: 40%;
-    margin: 0 10px 0 0;
+    justify-content: center;
+}
+
+.left-side div{
+    max-width: 26rem;
+    width: 100%;
 }
 
 .right-side {
-    flex-basis: 55%;
     display: flex;
+    flex-basis: 55%;
     flex-direction: column;
-    background-color: cadetblue;
     border-radius: 5px;
     text-align: center;
+    max-width: 100vw;
+    background-color: rgba(240, 240, 240, 0.2);
+}
+
+.right-side h1 {
+    background-color: whitesmoke;
+    border-radius: 10px 10px 0 0;
 }
 
 .places-div {
@@ -44,4 +58,23 @@
 
 .places-div div {
     margin: 5px;
+}
+
+.paginator-div  {
+    margin: 20px 0 20px 0;
+}
+
+.card {
+    box-shadow: 1px 0 6px 0 rgba(42, 42, 42, 1);
+}
+
+@media screen and (max-width: 600px) {
+    .left-side {
+        flex-basis: 100%;
+    }
+
+    .right-side {
+        flex-basis: 100%;
+        margin-top: 20px;
+    }
 }

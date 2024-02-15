@@ -84,7 +84,7 @@ def edit_account(request):
         if edit_account_form.is_valid() and edit_account_info_form.is_valid():
             edit_account_form.save()
             edit_account_info_form.save()
-            return redirect('account-info')
+            return redirect('info-account')
     else:
         edit_account_form = EditAccountForm(instance=request.user)
         edit_account_info_form = EditAccountInfoForm(instance=request.user.info)

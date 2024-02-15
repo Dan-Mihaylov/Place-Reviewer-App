@@ -10,15 +10,6 @@
     border-radius: 5px;
 }
 
-.form-div {
-    display: flex;
-    flex-direction: column;
-    background-color: whitesmoke;
-    max-width: 600px;
-    width: 100%;
-    margin: 10px 0 10px 0;
-}
-
-.field-form {
-    margin: 10px 0 10px 0;
+.content {
+    max-width: 30rem;
 }
